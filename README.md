@@ -11,3 +11,9 @@ Practice repository for the Masterclass 3 hands-on (WikiTech Builders Programme 
 Run the check yourself: `python check_contributors.py`
 
 This repository is released under the MIT License. Everything here may be reused under its terms.
+
+## Live repository dashboard
+
+The [WTB Practice dashboard](https://devjadiya.github.io/wtb-practice/) shows open pull requests and recent GitHub Actions runs. It reads public repository data from the GitHub API and refreshes automatically; use GitHub's [Watch settings](https://github.com/devjadiya/wtb-practice/subscription) to subscribe to repository notifications.
+
+To publish the dashboard, enable **Settings → Pages → Build and deployment → Source: GitHub Actions**. The `Deploy dashboard` workflow publishes updates from `main`.
