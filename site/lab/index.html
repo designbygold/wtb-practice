@@ -134,6 +134,23 @@
     .github-mark { color: #fff; }
     .gitlab-mark { color: #ff9854; }
     .gerrit-mark { color: #a4d39b; }
+    .lab-views { display: flex; width: fit-content; max-width: 100%; gap: 5px; margin: 28px 0 16px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: rgba(16, 24, 32, .8); }
+    .view-tab { min-height: 38px; padding: 0 14px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 750; }
+    .view-tab[aria-selected="true"] { border-color: var(--line); background: var(--panel2); color: var(--text); }
+    .view-tab:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+    .lab-view[hidden] { display: none; }
+    .pull-guide { margin-top: 16px; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(23, 35, 45, .92); }
+    .pull-guide h2 { margin: 0; font-size: 20px; }
+    .pull-guide-intro { margin: 7px 0 16px; color: var(--muted); font-size: 13px; }
+    .pull-guide-action { margin-bottom: 16px; }
+    .pull-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .pull-step { display: grid; grid-template-columns: 30px minmax(0, 1fr); align-content: start; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel2); }
+    .pull-step-number { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(99, 230, 163, .3); border-radius: 9px; background: rgba(99, 230, 163, .08); color: var(--green); font-size: 12px; font-weight: 850; }
+    .pull-step h3 { margin: 2px 0 5px; font-size: 13px; }
+    .pull-step p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .pull-step code { overflow-wrap: anywhere; }
+    .pull-guide-note { margin: 14px 0 0; padding: 12px 14px; border: 1px solid rgba(129, 200, 255, .22); border-radius: 10px; background: rgba(129, 200, 255, .06); color: var(--muted); font-size: 12px; }
+    .pull-guide-note strong { color: var(--text); }
 
     .compare {
       display: grid;
@@ -265,6 +282,10 @@
       .challenge-steps { grid-template-columns: 1fr; }
       .systems { width: 100%; justify-content: space-between; }
       .system-tab { flex: 1; justify-content: center; padding: 0 6px; }
+      .lab-views { width: 100%; }
+      .view-tab { flex: 1; padding: 0 8px; }
+      .pull-steps { grid-template-columns: 1fr; }
+      .pull-guide { padding: 16px; }
       .footer { flex-direction: column; }
     }
     @media (max-width: 420px) {
@@ -289,7 +310,7 @@
         </span>
       </a>
       <nav class="top-links" aria-label="Workshop links">
-        <a href="../pull/">Contribution steps</a>
+        <a href="#pull-steps" data-open-view="pull">Contribution steps</a>
         <a href="../">Overview</a>
         <a href="https://github.com/devjadiya/wtb-practice/actions">Live Actions</a>
         <a href="https://github.com/devjadiya/wtb-practice">Source code</a>
@@ -305,12 +326,18 @@
           <span class="safety"><span class="safety-dot" aria-hidden="true"></span>Safe simulation · never pushes or changes the real repository</span>
         </div>
         <div class="hero-actions">
-          <a class="button" href="../pull/">How to contribute</a>
+          <a class="button" href="#pull-steps" data-open-view="pull">How to contribute</a>
           <a class="button" href="../">← Back to dashboard</a>
           <a class="button primary" href="https://github.com/devjadiya/wtb-practice">Open the real repository ↗</a>
         </div>
       </section>
 
+      <div class="lab-views" role="tablist" aria-label="Choose a lab activity">
+        <button class="view-tab" id="simulator-tab" type="button" role="tab" aria-selected="true" aria-controls="simulator-panel" data-view="simulator">Pipeline simulator</button>
+        <button class="view-tab" id="pull-steps-tab" type="button" role="tab" aria-selected="false" aria-controls="pull-steps" data-view="pull" tabindex="-1">Pull Request steps</button>
+      </div>
+
+      <div class="lab-view" id="simulator-panel" role="tabpanel" aria-labelledby="simulator-tab" tabindex="0">
       <section class="workspace" aria-labelledby="lab-heading">
         <div class="tool-head">
           <div class="section-heading">
@@ -409,11 +436,52 @@
           <div class="note"><strong>Reality check:</strong> this lab simulates the contributor-format check and review steps. It does not create real Pull Requests, Merge Requests, Gerrit changes, CI runs, or deployments.</div>
         </aside>
       </section>
+      </div>
+
+      <section class="pull-guide lab-view" id="pull-steps" role="tabpanel" aria-labelledby="pull-steps-tab" tabindex="0" hidden>
+        <h2>Make your contribution and open a Pull Request</h2>
+        <p class="pull-guide-intro">No terminal is needed. Follow these steps in GitHub. You are finished when your Pull Request is open and its check is green.</p>
+        <div class="pull-guide-action">
+          <a class="button primary" href="https://github.com/devjadiya/wtb-practice">Open the practice repository ↗</a>
+          <a class="button" href="https://github.com/login">Sign in to GitHub ↗</a>
+        </div>
+        <ol class="pull-steps">
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">1</span>
+            <div><h3>Sign in and open the repository</h3><p>Sign in at <a href="https://github.com/login">github.com</a>, then open <a href="https://github.com/devjadiya/wtb-practice">the practice repository</a>.</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">2</span>
+            <div><h3>Make your own copy</h3><p>Click <strong>Fork</strong> near the top-right. Then click <strong>Create fork</strong>.</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">3</span>
+            <div><h3>Open the contributors file</h3><p>In your fork, click <strong>CONTRIBUTORS.md</strong>, then click the pencil icon (<strong>Edit this file</strong>).</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">4</span>
+            <div><h3>Add one line at the bottom</h3><p>Use your name, Wikimedia username, and one tool idea. Keep the spaces around the hyphens:</p><p><code>Your name - Your Wikimedia username - one tool idea</code></p><p>Do not remove anyone else's line.</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">5</span>
+            <div><h3>Save your change</h3><p>Click <strong>Commit changes…</strong>. Keep the default choice to commit to <code>main</code> in your fork. Add a short message and click <strong>Commit changes</strong>.</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">6</span>
+            <div><h3>Open a Pull Request to this repository</h3><p>In your fork, click <strong>Contribute</strong>, then <strong>Open pull request</strong>. Check that the base repository is <code>devjadiya/wtb-practice</code> and the base branch is <code>main</code>. Click <strong>Create pull request</strong>.</p></div>
+          </li>
+          <li class="pull-step">
+            <span class="pull-step-number" aria-hidden="true">7</span>
+            <div><h3>Check the automated test</h3><p>In your Pull Request, open <strong>Checks</strong> and wait. Green means the format check passed. If it is red, fix your line in your fork and commit again; the same Pull Request will update.</p></div>
+          </li>
+        </ol>
+        <p class="pull-guide-note"><strong>Leave the Pull Request open.</strong> A green check does not merge it. The maintainer reviews and merges it.</p>
+      </section>
     </main>
 
     <footer class="footer">
       <span>Built for WikiTech Builders Programme 2026 · Masterclass 3</span>
-      <span class="footer-links"><a href="../">Dashboard</a><a href="../pull/">Step-by-step guide</a><a href="https://github.com/devjadiya/wtb-practice/blob/main/README.md">Repository README</a></span>
+      <span class="footer-links"><a href="../">Dashboard</a><a href="#pull-steps" data-open-view="pull">Pull Request steps</a><a href="https://github.com/devjadiya/wtb-practice/blob/main/README.md">Repository README</a></span>
     </footer>
   </div>
 
@@ -481,11 +549,31 @@
       const statusChip = document.getElementById("run-status");
       const ciChip = document.getElementById("ci-chip");
       const reviewStatus = document.getElementById("review-status");
+      const simulatorPanel = document.getElementById("simulator-panel");
+      const pullStepsPanel = document.getElementById("pull-steps");
+      const viewTabs = Array.from(document.querySelectorAll(".view-tab"));
       let activeSystem = "github";
       let ciPassed = false;
       let approved = false;
       let merged = false;
       let logCount = 0;
+
+      function changeView(view, scrollToPanel) {
+        const showPullSteps = view === "pull";
+        simulatorPanel.hidden = showPullSteps;
+        pullStepsPanel.hidden = !showPullSteps;
+        viewTabs.forEach(button => {
+          const selected = button.dataset.view === view;
+          button.setAttribute("aria-selected", String(selected));
+          button.tabIndex = selected ? 0 : -1;
+        });
+        if (showPullSteps) {
+          history.replaceState(null, "", "#pull-steps");
+          if (scrollToPanel) pullStepsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (location.hash === "#pull-steps") {
+          history.replaceState(null, "", location.pathname + location.search);
+        }
+      }
 
       function currentSystem() {
         return systems[activeSystem];
@@ -651,6 +739,28 @@
         resetLifecycle();
         addLog(`Review vocabulary switched to ${system === "gerrit" ? "Gerrit" : system === "gitlab" ? "GitLab" : "GitHub"}.`, "");
       }
+
+      viewTabs.forEach((button, index) => {
+        button.addEventListener("click", () => changeView(button.dataset.view, false));
+        button.addEventListener("keydown", event => {
+          let nextIndex = index;
+          if (event.key === "ArrowRight") nextIndex = (index + 1) % viewTabs.length;
+          else if (event.key === "ArrowLeft") nextIndex = (index - 1 + viewTabs.length) % viewTabs.length;
+          else if (event.key === "Home") nextIndex = 0;
+          else if (event.key === "End") nextIndex = viewTabs.length - 1;
+          else return;
+          event.preventDefault();
+          viewTabs[nextIndex].focus();
+          changeView(viewTabs[nextIndex].dataset.view, false);
+        });
+      });
+      document.querySelectorAll('[data-open-view="pull"]').forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          changeView("pull", true);
+        });
+      });
+      if (location.hash === "#pull-steps") changeView("pull", false);
 
       document.querySelectorAll(".system-tab").forEach(button => {
         button.addEventListener("click", () => changeSystem(button.dataset.system));
