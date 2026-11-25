@@ -14,6 +14,6 @@ This repository is released under the MIT License. Everything here may be reused
 
 ## Live repository dashboard
 
-The [WTB Practice dashboard](https://devjadiya.github.io/wtb-practice/) shows open pull requests and recent GitHub Actions runs. It reads public repository data from the GitHub API and refreshes automatically. Try the [Pipeline Lab](https://devjadiya.github.io/wtb-practice/lab/) to safely simulate a change moving through Gerrit, GitLab, or GitHub CI. Use GitHub's [Watch settings](https://github.com/devjadiya/wtb-practice/subscription) to subscribe to repository notifications.
+The [WTB Practice dashboard](https://devjadiya.github.io/wtb-practice/) shows open pull requests and recent GitHub Actions runs. The [step-by-step contribution guide](https://devjadiya.github.io/wtb-practice/pull/) helps participants complete the exercise without a live walkthrough. It reads public repository data from the GitHub API and refreshes automatically. Try the [Pipeline Lab](https://devjadiya.github.io/wtb-practice/lab/) to safely simulate a change moving through Gerrit, GitLab, or GitHub CI. Use GitHub's [Watch settings](https://github.com/devjadiya/wtb-practice/subscription) to subscribe to repository notifications.
 
 To publish the dashboard, enable **Settings → Pages → Build and deployment → Source: GitHub Actions**. The `Deploy dashboard` workflow publishes the contents of `site/` from `main`.
