@@ -304,7 +304,7 @@
 
       <div class="live-status">
         <span class="live-label" id="live-label" role="status" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><span id="live-text">Connecting to GitHub…</span></span>
-        <span id="updated-at">Updates automatically every 60 seconds</span>
+        <span id="updated-at">Updates automatically every 5 minutes</span>
       </div>
 
       <section class="metrics" aria-label="Repository summary">
@@ -386,7 +386,7 @@
     </main>
 
     <footer class="footer">
-      <span>Live data from the public GitHub API · refreshes every 60 seconds</span>
+      <span>Live data from the public GitHub API · refreshes every 5 minutes</span>
       <span class="footer-links">
         <a href="https://github.com/devjadiya/wtb-practice/blob/main/README.md">Contribution guide</a>
         <a href="https://github.com/devjadiya/wtb-practice/blob/main/LICENSE">MIT License</a>
@@ -400,7 +400,7 @@
       const owner = "devjadiya";
       const repo = "wtb-practice";
       const api = `https://api.github.com/repos/${owner}/${repo}`;
-      const refreshInterval = 60_000;
+      const refreshInterval = 300_000;
       const numberFormatter = new Intl.NumberFormat();
       const relativeTime = new Intl.RelativeTimeFormat(undefined, { numeric: "auto" });
       const refreshButton = document.getElementById("refresh-button");
@@ -598,7 +598,7 @@
         }
 
         const now = new Date();
-        updatedAt.textContent = `Last checked ${now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", second: "2-digit" })} · auto-refresh every 60 seconds`;
+        updatedAt.textContent = `Last checked ${now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", second: "2-digit" })} · auto-refresh every 5 minutes`;
         setLiveState(failures ? "error" : "", failures ? `Some repository data could not load (${failures}/2)` : "Live · GitHub API connected");
         refreshButton.disabled = false;
       }
